@@ -56,7 +56,7 @@ def query_search(SpiderHandle, SID, query_input, editions, startYear, endYear):
     return records_num.replace(',','')
 
 
-def advance_search(query_input,save_dir):
+def advance_search(query_input,save_dir,startYear=1900,endYear=2017):
     #basic url
     base_url = 'http://apps.webofknowledge.com/'
     editions = ['SCI', 'SSCI', 'AHCI', 'ISTP', 'ISSHP', 'BSCI', 'BHCI', 'ESCI', 'CCR', 'IC']
@@ -114,4 +114,4 @@ def advance_search(query_input,save_dir):
     time.sleep(1)
 
 if __name__=="__main__":
-    advance_search('TS=({:})'.format(sys.argv[1]),sys.argv[2])
+    advance_search('TS=({:})'.format(sys.argv[1]),sys.argv[2],int(sys.argv[3]),int(sys.argv[4])
