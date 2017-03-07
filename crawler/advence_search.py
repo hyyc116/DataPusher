@@ -115,4 +115,4 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
     time.sleep(1)
 
 if __name__=="__main__":
-    advance_search('TS=({:})'.format(sys.argv[1]),sys.argv[2],int(sys.argv[3]),int(sys.argv[4]),int(sys.argv[5],sys.argv[6]))
+    advance_search('TS=({:})'.format(sys.argv[1]),sys.argv[2],int(sys.argv[3]),int(sys.argv[4]),int(sys.argv[5]),int(sys.argv[6]))
