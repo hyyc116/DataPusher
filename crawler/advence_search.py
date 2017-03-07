@@ -59,7 +59,7 @@ def query_search(SpiderHandle, SID, query_input, editions, startYear, endYear):
 def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
     #basic url
     base_url = 'http://apps.webofknowledge.com/'
-    editions = ['SCI', 'SSCI', 'AHCI', 'ISTP', 'ISSHP', 'BSCI', 'BHCI', 'ESCI', 'CCR', 'IC']
+    editions = ['SCI', 'SSCI', 'AHCI', 'ISTP', 'ISSHP', 'ESCI', 'CCR', 'IC']
     editions = editions[s:e]
     startYear = startYear
     endYear = endYear
