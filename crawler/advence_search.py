@@ -57,7 +57,7 @@ def advance_search(query_input,save_dir):
     #basic url
     base_url = 'http://apps.webofknowledge.com/'
     editions = ['SCI', 'SSCI', 'AHCI', 'ISTP', 'ISSHP', 'BSCI', 'BHCI', 'ESCI', 'CCR', 'IC']
-    startYear = 1990
+    startYear = 1900
     endYear = 2017
     
     #enroll in cookie and get sid
