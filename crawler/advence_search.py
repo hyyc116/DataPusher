@@ -43,11 +43,14 @@ def query_search(SpiderHandle, SID, query_input, editions, startYear, endYear):
     }
     res = requests.post("http://apps.webofknowledge.com/WOS_AdvancedSearch.do", data=datas)
     html = res.text.encode('utf-8')
-    records_num = re.findall('<a href="/summary.do?(.*?)" title="Click to view the results">(.*?)</a>', html)[0][1]
-    print records_num
+    
     f = open('search_result.html','w')
     f.write(html)
     f.close()
+
+    records_num = re.findall('<a href="/summary.do?(.*?)" title="Click to view the results">(.*?)</a>', html)[0][1]
+    print records_num
+    
     curl = base_url + query_url + SID + query_acts #change pagesize to 50
     html = SpiderHandle.get_url(curl)
     return records_num.replace(',','')
@@ -56,7 +59,7 @@ def query_search(SpiderHandle, SID, query_input, editions, startYear, endYear):
 def advance_search(query_input,save_dir):
     #basic url
     base_url = 'http://apps.webofknowledge.com/'
-    editions = ['SCI', 'SSCI']
+    editions = ['SCI', 'SSCI', 'AHCI', 'ISTP', 'ISSHP', 'BSCI', 'BHCI', 'ESCI', 'CCR', 'IC']
     startYear = 1900
     endYear = 2017
     
