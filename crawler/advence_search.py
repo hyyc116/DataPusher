@@ -1,7 +1,7 @@
 #coding:utf-8
 
 from spider import *
-
+import sys
 
 def query_search(SpiderHandle, SID, query_input, editions, startYear, endYear):
     '''
@@ -111,4 +111,4 @@ def advance_search(query_input,save_dir):
     time.sleep(1)
 
 if __name__=="__main__":
-    advance_search('TS=("SUPPROT VECTOR MACHINE")',sys.argv[2])
+    advance_search('TS=("SUPPROT VECTOR MACHINE")',sys.argv[1])
