@@ -111,4 +111,4 @@ def advance_search(query_input,save_dir):
     time.sleep(1)
 
 if __name__=="__main__":
-    advance_search('TS=("SUPPROT VECTOR MACHINE")',sys.argv[1])
+    advance_search('TS=({:})'.format(sys.argv[1]),sys.argv[2])
