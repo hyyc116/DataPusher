@@ -60,8 +60,8 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017):
     #basic url
     base_url = 'http://apps.webofknowledge.com/'
     editions = ['SCI', 'SSCI', 'AHCI', 'ISTP', 'ISSHP', 'BSCI', 'BHCI', 'ESCI', 'CCR', 'IC']
-    startYear = 1900
-    endYear = 2017
+    startYear = startYear
+    endYear = endYear
     
     #enroll in cookie and get sid
     SpiderHandle = Spider(base_url)
