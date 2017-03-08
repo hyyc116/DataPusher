@@ -118,7 +118,7 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
                 logging.info('found {:} references'.format(ref_count[0]))
                 ref_url = base_url+"/"+ref_link
                 SpiderHandle.headers['Referer'] = curl
-                iter_ref_pages(ref_url,SpiderHandle)
+                iter_ref_pages(ref_url,SpiderHandle,base_url)
 
             SpiderHandle.headers['Referer'] = url
             time.sleep(1)
