@@ -115,8 +115,8 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
                 logging.info('found reference list')
                 ref_node = refs[0]
                 ref_link = ref_node.get('href')
-                ref_text = ref_node.get_text()
-                print ref_text
+                ref_count = re.findall(r'(\d+).*',ref_node.get_text().strip())
+                print ref_count
             time.sleep(1)
         #To avoid Session expired, every 5 pages request for a new session
         if page%5 == 0:
