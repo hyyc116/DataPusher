@@ -141,7 +141,7 @@ def iter_ref_pages(ref_url,handler):
     next_url = nextPage.get('href')
     if next_url !='javascript: void(0)':
         page_num+=1
-        html = handler.get_url_with_cookie(ref_url)
+        html = handler.get_url_with_cookie(next_url)
         open('test-ref-{:}.html'.format(page_num),'w').write(html)
         links = handler.return_all_pages(html)
         logging.info('Ref page {:} found {:} links'.format(page_num,len(links)))
