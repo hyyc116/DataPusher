@@ -118,10 +118,7 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
                 logging.info('found {:} references'.format(ref_count[0]))
                 ref_url = base_url+"/"+ref_link
                 SpiderHandle.headers['Referer'] = curl
-                html = SpiderHandle.get_url_with_cookie(ref_url)
-                links = SpiderHandle.return_all_pages(html)
-                open('test-ref.html','w').write(html)
-                logging.info('first page found {:} links'.format(len(links)))
+                iter_ref_pages(ref_url,SpiderHandle)
 
             SpiderHandle.headers['Referer'] = url
             time.sleep(1)
@@ -132,6 +129,30 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
             records_num = query_search(SpiderHandle, SID, query_input, editions, startYear, endYear)
             SpiderHandle.cookie.save('cookie.txt',ignore_discard=True, ignore_expires=True)
     time.sleep(1)
+
+def iter_ref_pages(ref_url,handler):
+    page_num=1
+    html = handler.get_url_with_cookie(ref_url)
+    links = handler.return_all_pages(html)
+    open('test-ref-{:}.html'.format(page_num),'w').write(html)
+    logging.info('Ref page {:} found {:} links'.format(page_num,len(links)))
+    soup = bs(html,'lxml')
+    nextPage = soup.select('a.paginationNext')[0]
+    next_url = nextPage.get('href')
+    if next_url !='javascript: void(0)':
+        page_num+=1
+        html = handler.get_url_with_cookie(ref_url)
+        open('test-ref-{:}.html'.format(page_num),'w').write(html)
+        links = handler.return_all_pages(html)
+        logging.info('Ref page {:} found {:} links'.format(page_num,len(links)))
+        soup = bs(html,'lxml')
+        nextPage = soup.select('a.paginationNext')[0]
+        next_url = nextPage.get('href')
+
+
+
+
+
 
 if __name__=="__main__":
     advance_search('TS=({:})'.format(sys.argv[1]),sys.argv[2],int(sys.argv[3]),int(sys.argv[4]),int(sys.argv[5]),int(sys.argv[6]))
