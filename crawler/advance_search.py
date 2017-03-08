@@ -158,6 +158,7 @@ def crawl_pages(links,handler,base_url,ref_url):
     for i,link in enumerate(links):
         logging.info("dealing {:} reference paper.".format(i))
         ref_paper_link=base_url+link
+        ref_paper_link = ref_paper_link.replace('&amp;',"&")
         ref_html = handler.get_url_with_cookie(ref_paper_link)
         open('ref_paper_{:}.html'.format(i),"w").write(ref_html)
 
