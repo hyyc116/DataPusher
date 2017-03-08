@@ -130,7 +130,8 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
             SpiderHandle.cookie.save('cookie.txt',ignore_discard=True, ignore_expires=True)
     time.sleep(1)
 
-def iter_ref_pages(ref_url,handler):
+
+def iter_ref_pages(ref_url,handler,base_url):
     page_num=1
     html = handler.get_url_with_cookie(ref_url)
     links = handler.return_all_pages(html)
@@ -139,18 +140,20 @@ def iter_ref_pages(ref_url,handler):
     soup = bs(html,'lxml')
     nextPage = soup.select('a.paginationNext')[0]
     next_url = nextPage.get('href')
-    if next_url !='javascript: void(0)':
+    while next_url !='javascript: void(0)':
         page_num+=1
         html = handler.get_url_with_cookie(next_url)
         open('test-ref-{:}.html'.format(page_num),'w').write(html)
         links = handler.return_all_pages(html)
+        for i,link in enumerate(links):
+            logging.info("dealing {:} reference paper.".format(i))
+            ref_paper_link=base_url+"/"+link
+            ref_html = handler.get_url_with_cookie(ref_paper_link)
+            open('ref_paper_{:}.html'.format(i),"w").write(ref_html)
         logging.info('Ref page {:} found {:} links'.format(page_num,len(links)))
         soup = bs(html,'lxml')
         nextPage = soup.select('a.paginationNext')[0]
         next_url = nextPage.get('href')
-
-
-
 
 
 
