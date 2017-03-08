@@ -118,10 +118,12 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
                 logging.info('found {:} references'.format(ref_count[0]))
                 ref_url = base_url+"/"+ref_link
                 SpiderHandle.headers['Referer'] = curl
-                html = SpiderHandle.get_url_with_cookie(curl)
+                html = SpiderHandle.get_url_with_cookie(ref_url)
                 links = SpiderHandle.return_all_pages(html)
+                open('test-ref.html','w').write(html)
                 logging.info('first page found {:} links'.format(len(links)))
 
+            SpiderHandle.headers['Referer'] = url
             time.sleep(1)
         #To avoid Session expired, every 5 pages request for a new session
         if page%5 == 0:
