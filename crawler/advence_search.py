@@ -2,6 +2,7 @@
 
 from spider import *
 import sys
+from bs4 import BeautifulSoup as bs
 
 def query_search(SpiderHandle, SID, query_input, editions, startYear, endYear):
     '''
@@ -105,7 +106,12 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
             f = open(doc_dir+'/'+docid.zfill(5)+'.html','w+')
             f.write(html)
             f.close()
-            #time.sleep(1)
+
+            #get reference list
+            soup = bs(html,'lxml')
+            ref_link = soup.select('div.block-text-content p')[2]['href']
+            print ref_link
+            time.sleep(1)
         #To avoid Session expired, every 5 pages request for a new session
         if page%5 == 0:
             SpiderHandle = Spider(base_url)
