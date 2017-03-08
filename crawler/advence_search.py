@@ -109,7 +109,7 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
 
             #get reference list
             soup = bs(html,'lxml')
-            ref_link = soup.select('div.block-text-content p')[2]['href']
+            ref_link = soup.select('div.block-text-content p')[2]
             print ref_link
             time.sleep(1)
         #To avoid Session expired, every 5 pages request for a new session
