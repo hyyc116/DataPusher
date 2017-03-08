@@ -112,11 +112,16 @@ def advance_search(query_input,save_dir,startYear=1900,endYear=2017,s=2,e=4):
             snd_p= soup.select('div.block-text-content p')[1]
             refs= snd_p.select('a[href]')
             if len(refs)==1:
-                logging.info('found reference list')
                 ref_node = refs[0]
                 ref_link = ref_node.get('href')
                 ref_count = re.findall(r'(\d+).*',ref_node.get_text().strip())
-                print ref_count
+                logging.info('found {:} references'.format(ref_count[0]))
+                ref_url = base_url+"/"+ref_link
+                SpiderHandle.headers['Referer'] = curl
+                html = SpiderHandle.get_url_with_cookie(curl)
+                links = SpiderHandle.return_all_pages(html)
+                logging.info('first page found {:} links'.format(len(links)))
+
             time.sleep(1)
         #To avoid Session expired, every 5 pages request for a new session
         if page%5 == 0:

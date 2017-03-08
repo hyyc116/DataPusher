@@ -85,3 +85,8 @@ class Spider(object):
 	def get_all_pages(self, html):
 		self.urls = re.findall(r'<a class="smallV110" href="(.*?)"',html)
 
+	def return_all_pages(self, html):
+		return re.findall(r'<a class="smallV110" href="(.*?)"',html)
+
+
+
